@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'iam'
 ]
 
 MIDDLEWARE = [
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'linkup_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'linkup_f2jy',
+        'USER': 'linkup_admin',
+        'PASSWORD': 'LwjEiGK3JF4zZbH7FDIYLIENvKJqyKCe',
+        'HOST': 'dpg-cjbj6abbq8nc73d7v760-a.singapore-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
@@ -122,3 +127,35 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'iam.authentication.CustomAuthentication',
+    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    # ),
+    'EXCEPTION_HANDLER': "iam.exception.custom_exception_handler"
+}
+
+AUTH_USER_MODEL = 'iam.User'
+
+#Email stuff
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'linkup.dev.app@gmail.com'
+EMAIL_HOST_PASSWORD = 'hiawqzktyfeaxpbl'
+
+#For Jwt Token
+SECRET_KEY = 'lol_kdkand*dhawjbkdmklawbd'
+
+SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER": "iam.serializers.CustomTokenObtainPairSerializer",
+    'USER_ID_FIELD': 'user_id',
+    'ALGORITHM': 'HS512',
+    'SIGNING_KEY': SECRET_KEY,
+    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),
+}
