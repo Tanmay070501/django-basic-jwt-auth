@@ -157,5 +157,5 @@ SIMPLE_JWT = {
     'USER_ID_FIELD': 'user_id',
     'ALGORITHM': 'HS512',
     'SIGNING_KEY': SECRET_KEY,
-    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
 }

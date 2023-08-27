@@ -21,16 +21,15 @@ class CustomAuthentication(BaseAuthentication):
             # header = 'Bearer xxxxxxxxxxxxxxxxxxxxxxxx'
             header = authorization_header.split(' ')[0]
             if header != 'Bearer':
-                return None
+                raise CustomAuthFailed("Invalid Token prefix",status.HTTP_400_BAD_REQUEST)
             access_token = authorization_header.split(' ')[1]
             payload = verify_token(access_token)
-            request.user = payload['user_id']
             user = User.objects.filter(user_id=payload['user_id']).first()
             if user is None:
                 raise CustomAuthFailed("User not found",status.HTTP_404_NOT_FOUND)
             return (user, None)
         except IndexError:
-            raise CustomAuthFailed("Token prefix missing",status.HTTP_400_BAD_REQUEST)
+            raise CustomAuthFailed("Token missing",status.HTTP_400_BAD_REQUEST)
         except ExpiredSignatureError:
             raise CustomAuthFailed("Token has expired",status.HTTP_406_NOT_ACCEPTABLE)
         except InvalidTokenError:
