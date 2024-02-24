@@ -7,5 +7,11 @@ from rest_framework.permissions import IsAuthenticated
 
 class SecretView(APIView):
     permission_classes = [IsAuthenticated]
+    """
+    returns(if token is authenticated):
+    {
+        "message": "Yoooo"
+    }
+    """
     def get(self, request):
         return generate_successful_response("Yoooo")

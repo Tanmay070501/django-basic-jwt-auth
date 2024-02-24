@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "9f97870f-6fbe-4140-849a-220dfdc17936",
+		"name": "Basic JWT Auth Django",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24757190"
+	},
+	"item": [
+		{
+			"name": "Sign up",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Secret Authenticated Route",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Email",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/auth/verify/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJlbWFpbCI6InRhbm1heWlpdGlhbisxMjNAZ21haWwuY29tIn0.lVIyimQBOYbJPfOLY-4rVE3Wfup-4L4n3rr5PLhbRqc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"verify",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJlbWFpbCI6InRhbm1heWlpdGlhbisxMjNAZ21haWwuY29tIn0.lVIyimQBOYbJPfOLY-4rVE3Wfup-4L4n3rr5PLhbRqc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "verify_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJlbWFpbCI6InRhbm1heWlpdGlhbisxMjNAZ21haWwuY29tIn0.lVIyimQBOYbJPfOLY-4rVE3Wfup-4L4n3rr5PLhbRqc"
+		}
+	]
+}

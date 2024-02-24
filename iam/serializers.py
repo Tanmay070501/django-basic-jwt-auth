@@ -6,6 +6,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('user_id','email','email_verified')
 
+class UserMinDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('user_id','email')
+
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """Customizes JWT default Serializer to add more information about user"""
