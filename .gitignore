@@ -87,3 +87,9 @@ local_settings.py
 
 .env
 db.sqlite3
+
+temp-env/
+
+*.DS_Store
+**/.DS_Store
+**/__pycache__/
