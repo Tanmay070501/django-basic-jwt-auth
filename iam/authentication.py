@@ -35,6 +35,7 @@ class CustomAuthentication(BaseAuthentication):
         except InvalidTokenError:
             raise CustomAuthFailed('Invalid token',status.HTTP_400_BAD_REQUEST)
         except Exception as e:
+            print(str(e))
             raise CustomAuthFailed(f"{e}")
 
 class CustomAuthFailed(APIException):
@@ -44,6 +45,6 @@ class CustomAuthFailed(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_code = 'error'
     def __init__(self, detail, status_code=None):
-        self.detail = {"message":detail}
+        self.detail = detail
         if status_code is not None:
             self.status_code = status_code

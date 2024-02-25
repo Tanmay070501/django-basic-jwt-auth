@@ -9,24 +9,94 @@
 		{
 			"name": "Sign up",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"tanmayiitian+12ew34@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/signup/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"signup",
+						""
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Login",
 			"request": {
-				"method": "GET",
-				"header": []
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"tanmayiitian+123@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Secret Authenticated Route",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODE2MTI5LCJpYXQiOjE3MDg4MDg5MjksImp0aSI6IjhmODcyMWQyMjRjMTQzM2U4OWY0M2UzNzYxZTk5NjdkIiwidXNlcl9pZCI6MywiZW1haWwiOiJ0YW5tYXlpaXRpYW4rMTJAZ21haWwuY29tIn0.J4nFVp-QG51zRh8iNmHnLe_whfufcbtHqH4NOHA7lOuaM6Ak3B8n1AJabY_fPRmP1dR4qymJvI8MfWoBKkR0Hg",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/secret/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"secret",
+						""
+					]
+				}
 			},
 			"response": []
 		},
@@ -63,6 +133,48 @@
 							"key": "token",
 							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJlbWFpbCI6InRhbm1heWlpdGlhbisxMjNAZ21haWwuY29tIn0.lVIyimQBOYbJPfOLY-4rVE3Wfup-4L4n3rr5PLhbRqc"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Details",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODM1MTczLCJpYXQiOjE3MDg4Mjc5NzMsImp0aSI6ImQ5N2RjNDAzM2VmNzRiM2JiY2U4NjVlMTFhZTEzYmM5IiwidXNlcl9pZCI6NCwiZW1haWwiOiJ0YW5tYXlpaXRpYW4rMTIzQGdtYWlsLmNvbSJ9.KXj8SS0aOZusDG7iOjv5YjvEAWGFmDmC76zwx-J623iUx6bNKDBvGLfPWmWKq_9NPqX--dD9NDzdnqVZWnIhfA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/auth/user_details/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"user_details",
+						""
 					]
 				}
 			},

@@ -3,9 +3,10 @@ from rest_framework.views import APIView
 from .models import User
 from rest_framework import status
 from api.utils import generate_error_response, generate_successful_response
-from .utils import create_token, send_verification_email, verify_verification_token
-#from .serializers import UserSerializer
+from .utils import create_token, send_verification_email, verify_verification_token, verify_token
+from .serializers import UserSerializer
 from jwt import ExpiredSignatureError, InvalidTokenError
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
@@ -84,5 +85,13 @@ class EmailVerification(APIView):
                 return generate_error_response('Invalid Token', status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
                 return generate_error_response(f"{e}", status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return generate_error_response(str(e))
+        
+class UserDetails(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        try:
+            return generate_successful_response(UserSerializer(request.user).data)
         except Exception as e:
             return generate_error_response(str(e))

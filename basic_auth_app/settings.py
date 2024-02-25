@@ -145,9 +145,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'iam.authentication.CustomAuthentication',
     ),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-    # ),
     'EXCEPTION_HANDLER': "iam.exception.custom_exception_handler"
 }
 
